@@ -13,9 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 
-@Autonomous(name = "RIGHT_AUTO1HIGH", group = "Linear Opmode")
+@Autonomous(name = "LEFT_AUTO2HIGH", group = "Linear Opmode")
 
-public class RIGHT_AUTO1HIGH extends AutonomousBot {
+public class LEFT_AUTO2HIGH extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
@@ -32,32 +32,28 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
     // delivers to highest junction and returns true if successful
 
 
+
+
     private boolean Park1() {
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //moveForward(0.1,0.3);
-        //rightStrafe(1.0,0.3);
+
+        moveForward(0.1,0.3);
+        leftStrafe(1.0,0.3);
         //turnLeft(1);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        //sleep(200);
-        moveForward(2.4, 0.3);
+        // raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(200);
-        //leftStrafe(1.6,0.3);
-        turnLeft(50);
-        stdWristServo.setPosition(WRIST_REST_POSITION);
-        sleep(300);
+        moveForward(2.1,0.3);
+        sleep(200);
+        rightStrafe(1.6,0.3);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(0.2, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
-        turnRight(50);
-        leftStrafe(1.1, 0.3);
-        raiseLinearSlide(CONE_POSITION);
+        moveBackward(0.1, 0.5);
+        leftStrafe(1.5,0.3);
+        raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
 
 
@@ -97,62 +93,50 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
 
     private boolean Park2() {
 
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //moveForward(0.1,0.3);
-        //rightStrafe(1.0,0.3);
-        //turnLeft(1);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        //sleep(200);
-        moveForward(2.4, 0.3);
+        moveForward(0.1,0.3);
+        leftStrafe(1.0,0.3);
         sleep(200);
-        //leftStrafe(1.6,0.3);
-        turnLeft(50);
-        stdWristServo.setPosition(WRIST_REST_POSITION);
-        sleep(300);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(2.1,0.3);
+        sleep(200);
+        rightStrafe(1.6,0.3);
+        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
+        moveForward(0.2, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
-        turnRight(50);
+        moveBackward(0.1, 0.5);
+        leftStrafe(0.4,0.3);
+        moveBackward(1.0, 0.3);
+        raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
 
         // raiseLinearSlide(GROUND_JUNCTION_POSITION);
+
 
 
         return true;
     }
 
     private boolean Park3() {
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //moveForward(0.1,0.3);
-        //rightStrafe(1.0,0.3);
-        //turnLeft(1);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        //sleep(200);
-        moveForward(2.4, 0.3);
+        moveForward(0.1,0.3);
+        leftStrafe(1.0,0.3);
         sleep(200);
-        //leftStrafe(1.6,0.3);
-        turnLeft(50);
-        stdWristServo.setPosition(WRIST_REST_POSITION);
-        sleep(300);
+        moveForward(2.1,0.3);
+        sleep(200);
+        rightStrafe(1.6,0.3);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(0.2, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
-        turnRight(50);
-        rightStrafe(0.7);
+        moveBackward(0.1, 0.5);
+        rightStrafe(0.4,0.3);
+        moveBackward(1.0, 0.3);
+        raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
 
         return true;
@@ -190,7 +174,7 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(1.0, 16.0 / 9.0);
+            tfod.setZoom(1.0, 16.0/9.0);
         }
 
         /** Wait for the game to begin */
@@ -199,6 +183,7 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         waitForStart();
 
         if (opModeIsActive()) {
+
 
 
             while (opModeIsActive()) {
@@ -216,25 +201,28 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
                         // step through the list of recognitions and display image position/size information for each one
                         // Note: "Image number" refers to the randomized image orientation/number
                         for (Recognition recognition : updatedRecognitions) {
-                            double col = (recognition.getLeft() + recognition.getRight()) / 2;
-                            double row = (recognition.getTop() + recognition.getBottom()) / 2;
-                            double width = Math.abs(recognition.getRight() - recognition.getLeft());
-                            double height = Math.abs(recognition.getTop() - recognition.getBottom());
+                            double col = (recognition.getLeft() + recognition.getRight()) / 2 ;
+                            double row = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+                            double width  = Math.abs(recognition.getRight() - recognition.getLeft()) ;
+                            double height = Math.abs(recognition.getTop()  - recognition.getBottom()) ;
 
-                            telemetry.addData("", " ");
-                            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
-                            telemetry.addData("- Position (Row/Col)", "%.0f / %.0f", row, col);
-                            telemetry.addData("- Size (Width/Height)", "%.0f / %.0f", width, height);
+                            telemetry.addData(""," ");
+                            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100 );
+                            telemetry.addData("- Position (Row/Col)","%.0f / %.0f", row, col);
+                            telemetry.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
 
                             // WRITE CODE WHAT TO DO WHEN DETECTED SIGNAL SLEEVE
 
-                            if (recognition.getLabel().equals("SilverEagleSignal1") && recognition.getConfidence() * 100 > 0.750) {
+                            if (recognition.getLabel().equals("SilverEagleSignal1") && recognition.getConfidence() * 100 > 0.750)
+                            {
                                 Park1();
                                 return;
-                            } else if (recognition.getLabel().equals("SilverEagleSignal2") && recognition.getConfidence() * 100 > 0.750) {
+                            }
+                            else if (recognition.getLabel().equals("SilverEagleSignal2") && recognition.getConfidence() * 100 > 0.750){
                                 Park2();
                                 return;
-                            } else if (recognition.getLabel().equals("SilverEagleSignal3") && recognition.getConfidence() * 100 > 0.750) {
+                            }
+                            else if (recognition.getLabel().equals("SilverEagleSignal3") && recognition.getConfidence() * 100 > 0.750){
                                 Park3();
                                 return;
                             }

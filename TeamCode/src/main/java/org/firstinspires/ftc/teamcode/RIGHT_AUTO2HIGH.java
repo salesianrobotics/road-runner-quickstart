@@ -13,9 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 
-@Autonomous(name = "RIGHT_AUTO1HIGH", group = "Linear Opmode")
+@Autonomous(name = "RIGHT_AUTO2HIGH", group = "Linear Opmode")
 
-public class RIGHT_AUTO1HIGH extends AutonomousBot {
+public class RIGHT_AUTO2HIGH extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
