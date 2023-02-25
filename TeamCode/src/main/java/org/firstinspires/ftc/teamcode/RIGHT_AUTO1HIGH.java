@@ -33,31 +33,36 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
 
 
     private boolean Park1() {
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         //moveForward(0.1,0.3);
         //rightStrafe(1.0,0.3);
         //turnLeft(1);
         //raiseLinearSlide(HIGH_JUNCTION_POSITION);
         //sleep(200);
-        moveForward(2.4, 0.3);
+        moveForward(0.1, 0.3);
         sleep(200);
         //leftStrafe(1.6,0.3);
-        turnLeft(50);
-        stdWristServo.setPosition(WRIST_REST_POSITION);
+        turnLeft(90);
+        //stdWristServo.setPosition(WRIST_REST_POSITION);
+        rightStrafe(2.5,1.0);
         sleep(300);
+        turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(0.1, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
-        turnRight(50);
-        leftStrafe(1.1, 0.3);
-        raiseLinearSlide(CONE_POSITION);
+        moveBackward(0.1, 0.5);
+        turnLeft(45);
+        //leftStrafe(0.5, 0.3);
+        //turnRight(50);
+        moveForward(1.0, 0.5);
+        //leftStrafe(1.1, 0.3);
+        raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
 
 
@@ -111,14 +116,14 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         sleep(300);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(0.3, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
+        moveBackward(0.3, 0.5);
         turnRight(50);
 
 
@@ -143,14 +148,14 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         sleep(300);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(300);
-        moveForward(0.4, 0.5);
+        moveForward(0.3, 0.5);
         sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(400);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(400);
-        moveBackward(0.4, 0.5);
+        moveBackward(0.3, 0.5);
         turnRight(50);
         rightStrafe(0.7);
 
@@ -177,10 +182,10 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         initVuforia();
         initTfod();
 
-        /**
+        /*
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
-         **/
+         */
         if (tfod != null) {
             tfod.activate();
 
@@ -193,7 +198,7 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
             tfod.setZoom(1.0, 16.0 / 9.0);
         }
 
-        /** Wait for the game to begin */
+        /* Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
