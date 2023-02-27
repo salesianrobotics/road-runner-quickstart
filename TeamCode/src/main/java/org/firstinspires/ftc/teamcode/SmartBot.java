@@ -31,13 +31,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorImplEx;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
@@ -45,10 +40,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+
 /**
  * In this case that robot is a StandardBot.
  */
-public abstract class StandardBot extends LinearOpMode {
+public abstract class SmartBot extends LinearOpMode {
     static final double TICKS_PER_MOTOR_REV = 537.7; // 5203-2402-0019 goBilda Motor Encoder
     //static final double PPR_ARM_MOTOR = 3895.9; // 5202 Series Yellow Jacket Planetary Gear Motor (139:1 Ratio, 43 RPM, 3.3 - 5V Encoder)
 
@@ -65,11 +62,11 @@ public abstract class StandardBot extends LinearOpMode {
     static final double TICKS_PER_INCH = (TICKS_PER_MOTOR_REV * DRIVE_TRAIN_GEAR_RATIO) /
             WHEEL_CIRCUMFERENCE;
 
-    static final double OPTIMAL_DRIVE_SPEED = 0.80 * StandardBot.MAX_DRIVE_TRAIN_VELOCITY;
-    static final double AUTO_OPTIMAL_DRIVE_SPEED = .60 * StandardBot.MAX_DRIVE_TRAIN_VELOCITY;
+    static final double OPTIMAL_DRIVE_SPEED = 0.80 * SmartBot.MAX_DRIVE_TRAIN_VELOCITY;
+    static final double AUTO_OPTIMAL_DRIVE_SPEED = .60 * SmartBot.MAX_DRIVE_TRAIN_VELOCITY;
 
-    static final double OPTIMAL_TURN_SPEED = 0.4 * StandardBot.MAX_DRIVE_TRAIN_VELOCITY;
-    static final double OPTIMAL_STRAFE_SPEED = 1.0 * StandardBot.MAX_DRIVE_TRAIN_VELOCITY;
+    static final double OPTIMAL_TURN_SPEED = 0.4 * SmartBot.MAX_DRIVE_TRAIN_VELOCITY;
+    static final double OPTIMAL_STRAFE_SPEED = 1.0 * SmartBot.MAX_DRIVE_TRAIN_VELOCITY;
 
     static final double OPTIMAL_CURRENT_TOLERANCE = 5000.00;
 
@@ -150,7 +147,7 @@ public abstract class StandardBot extends LinearOpMode {
     HardwareMap hwMap = null;
 
     /* Constructor */
-    public StandardBot() {
+    public SmartBot() {
     }
 
     public void checkMotorCurrent(String motorName, DcMotorEx motor, double maxCurrent)
@@ -538,11 +535,11 @@ public abstract class StandardBot extends LinearOpMode {
         setAllMotorsToZeroPower();
         //setCustomPIDFCoefficients();
 
-        stdLeftFront.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
-        stdLeftRear.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);;
-        stdRightFront.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
-        stdRightRear.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
-        stdLinearSlide.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdLeftFront.setCurrentAlert(SmartBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdLeftRear.setCurrentAlert(SmartBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdRightFront.setCurrentAlert(SmartBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdRightRear.setCurrentAlert(SmartBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdLinearSlide.setCurrentAlert(SmartBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
 
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         //stdGripperServo.setPosition(GRIPPER_MIDDLE_POSITION);
