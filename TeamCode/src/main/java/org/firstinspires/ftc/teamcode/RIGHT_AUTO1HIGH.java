@@ -32,7 +32,9 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
     // delivers to highest junction and returns true if successful
 
 
-    private boolean Park1() {
+    private void Park1() {
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
         //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         //moveForward(0.1,0.3);
         //rightStrafe(1.0,0.3);
@@ -97,12 +99,12 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
 
         // stdWristServo.setPosition(WRIST_UP_POSITION);
 
-        return true;
-
     }
 
-    private boolean Park2() {
+    private void Park2() {
 
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
         rightStrafe(3.4,0.3);
         sleep(300);
         //turnRight(45);
@@ -124,10 +126,12 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         //leftStrafe(1.1, 0.3);
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
-        return true;
     }
 
-    private boolean Park3() {
+    private void Park3() {
+
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
         rightStrafe(3.4,0.3);
         sleep(300);
         //turnRight(45);
@@ -148,9 +152,6 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         moveBackward(1.0, 0.5);
         //leftStrafe(1.1, 0.3);
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
-
-
-        return true;
     }
 
     @Override

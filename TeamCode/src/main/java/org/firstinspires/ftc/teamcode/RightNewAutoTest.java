@@ -33,7 +33,7 @@ public class RightNewAutoTest extends AutonomousBot {
 
 
 
-    private boolean Park1() {
+    private void Park1() {
 
         moveForward(0.1,0.3);
 
@@ -52,7 +52,7 @@ public class RightNewAutoTest extends AutonomousBot {
         moveForward(1.9,0.7);
         leftStrafe(0.1,0.8);
         turnRight(90);
-        raiseLinearSlide(CONE_POSITION);
+        raiseLinearSlide(AUTO_CONE_POSITION);
         moveForward(0.2,0.3);
         stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
         sleep(200);
@@ -73,28 +73,17 @@ public class RightNewAutoTest extends AutonomousBot {
         leftStrafe(0.4,0.8);
         moveBackward(0.1, 0.5);
 
-
-
-        return true;
-
     }
 
-    private boolean Park2() {
+    private void Park2() {
 
 
 
         // raiseLinearSlide(GROUND_JUNCTION_POSITION);
-
-
-
-        return true;
     }
 
-    private boolean Park3() {
+    private void Park3() {
 
-
-
-        return true;
     }
 
     @Override

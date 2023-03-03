@@ -78,7 +78,7 @@ public abstract class AutonomousBot extends StandardBot {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "LogitechWebcam");
+        parameters.cameraName = hardwareMap.get(WebcamName.class, "LogitechWebcamRight");
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);

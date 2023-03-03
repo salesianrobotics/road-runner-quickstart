@@ -202,7 +202,9 @@ public class DuoTeleOpMain extends StandardBot {
             {
                 wristServo.setPosition(WRIST_REST_POSITION);
             }
-
+            if (gamepad2.dpad_up){
+                raiseLinearSlide(HIGH_JUNCTION_POSITION);
+            }
 
             telemetry.addData("WristServo", "position (%.2f)", wristServo.getPosition());
 

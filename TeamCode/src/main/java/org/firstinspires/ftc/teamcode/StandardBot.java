@@ -40,6 +40,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorImplEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -130,13 +131,16 @@ public abstract class StandardBot extends LinearOpMode {
     static final double WRIST_DOWN_POSITION  = 0.05;     // Minimum rotational position
     static final double WRIST_MIDDLE_POSITION  = 0.35;//(WRIST_UP_POSITION + WRIST_DOWN_POSITION)/2.0 + 0.1;
     static final double WRIST_LOWER_GRAB_POSITION  = (WRIST_UP_POSITION + WRIST_DOWN_POSITION)/2.0;
-    static final double WRIST_REST_POSITION = 0.99;
+    static final double WRIST_REST_POSITION = 0.70;
 
     static final int HIGH_JUNCTION_POSITION = (int)(33.0 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int MEDIUM_JUNCTION_POSITION = (int)(23.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int LOW_JUNCTION_POSITION = (int)(13.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int GROUND_JUNCTION_POSITION = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
-    static final int CONE_POSITION = (int)(8.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+
+    static final int AUTO_CONE_POSITION = (int)(8.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+    static final int AUTO_CONE_POSITION_DECREMENT = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+
 
     static final int SLIGHT_DOWN_SLIDE_HIGH = (int)(28.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
@@ -376,6 +380,55 @@ public abstract class StandardBot extends LinearOpMode {
         leftStrafe(-nTiles, percentMaxSpeed);
     }
 
+    /******* movement by inches */
+    public void moveForwardInches(double inches) {
+        //nTiles += DRIVE_ADJUSTMENT;
+        encoderDrive(AUTO_OPTIMAL_DRIVE_SPEED, inches, inches);
+    }
+
+    public void moveForwardInches(double inches, double percentMaxSpeed) {
+        //nTiles += DRIVE_ADJUSTMENT;
+        encoderDrive(percentMaxSpeed * MAX_DRIVE_TRAIN_VELOCITY, inches, inches);
+    }
+
+    public void moveBackwardInches(double inches) {
+        moveForwardInches(-inches);
+    }
+
+    public void moveBackwardInches(double inches, double percentMaxSpeed) {
+        moveForwardInches(-inches, percentMaxSpeed);
+    }
+
+    public void leftStrafeInches(double inches) {
+        //nTiles += LEFT_STRAFE_ADJUSTMENT; // custom adjustment for silver eagles
+
+        encoderLeftStrafe(OPTIMAL_STRAFE_SPEED, inches, inches);
+    }
+
+    public void leftStrafeInches(double inches, double percentMaxSpeed) {
+
+        //nTiles += LEFT_STRAFE_ADJUSTMENT; // custom adjustment for silver eagles
+
+
+        encoderLeftStrafe(percentMaxSpeed * OPTIMAL_STRAFE_SPEED, inches, inches);
+    }
+
+    public void rightStrafeInches(double inches) {
+
+        //nTiles += RIGHT_STRAFE_ADJUSTMENT;
+
+        leftStrafeInches(-inches);
+    }
+
+    public void rightStrafeInches(double inches, double percentMaxSpeed) {
+
+        //nTiles += RIGHT_STRAFE_ADJUSTMENT;
+
+        leftStrafeInches(-inches, percentMaxSpeed);
+    }
+
+    /* End movement by inches */
+
     public void setGripperPosition(double servoPosition)
     {
         stdGripperServo.setPosition(servoPosition);
@@ -539,12 +592,13 @@ public abstract class StandardBot extends LinearOpMode {
         //setCustomPIDFCoefficients();
 
         stdLeftFront.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
-        stdLeftRear.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);;
+        stdLeftRear.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
         stdRightFront.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
         stdRightRear.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
         stdLinearSlide.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
 
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        telemetry.addData("WristServo:", "MIDDLE POSITION");
         //stdGripperServo.setPosition(GRIPPER_MIDDLE_POSITION);
 
 
@@ -553,7 +607,7 @@ public abstract class StandardBot extends LinearOpMode {
         //telemetry.addData("GripperServo", "position (%.2f)", stdGripperServo.getPosition());
         //telemetry.addData("WristServo", "position (%.2f)", stdWristServo.getPosition());
 
-        //telemetry.update();
+        telemetry.update();
     }
 
     public void raiseLinearSlide(int position) {
@@ -587,5 +641,38 @@ public abstract class StandardBot extends LinearOpMode {
         stdLinearSlide.setVelocity(0.0);
 
     }
+
+    public void lowerLinearSlide(int position) {
+
+
+        //telemetry.addData("raiseLinearSlide", "Setting to RUN WITH ENCODER");
+        stdLinearSlide.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+        stdLinearSlide.setDirection(DcMotorEx.Direction.REVERSE);
+
+        //telemetry.addData("raiseLinearSlide", "Setting TargetPosition to %5d", position);
+        stdLinearSlide.setTargetPosition(position);
+
+        //telemetry.addData("raiseLinearSlide", "Setting Run to Position");
+        stdLinearSlide.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);  // Can't hurt to call this repeatedly
+
+        //telemetry.addData("raiseLinearSlide", "Setting Arm Velocity to %7.2f", OPTIMAL_ARM_SPEED );
+        stdLinearSlide.setVelocity(OPTIMAL_LINEAR_SLIDE_SPEED);
+
+        while (stdLinearSlide.isBusy() && !stdLinearSlide.isOverCurrent())
+        {
+            sleep(10);
+            //   telemetry.addData("raiseLinearSlide", "targetPosition is %7d", stdLinearSlide.getTargetPosition());
+            //   telemetry.addData("raiseLinearSlide", "currentPosition is %7d", stdLinearSlide.getCurrentPosition());
+            //   telemetry.addData("raiseLinearSlide", "CURRENT is %5.2f milli-amps", stdLinearSlide.getCurrent(CurrentUnit.MILLIAMPS));
+
+            //   telemetry.update();
+        }
+
+        //telemetry.addData("raiseLinearSlide", "Setting velocity to 0.0 now");
+        stdLinearSlide.setVelocity(0.0);
+
+    }
+
 
 }
