@@ -138,7 +138,7 @@ public abstract class StandardBot extends LinearOpMode {
     static final int LOW_JUNCTION_POSITION = (int)(13.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int GROUND_JUNCTION_POSITION = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
-    static final int AUTO_CONE_POSITION = (int)(4.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+    static final int AUTO_CONE_POSITION = (int)(4.5 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int AUTO_CONE_POSITION_DECREMENT = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
 

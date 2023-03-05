@@ -68,6 +68,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
             sleep(200);
             autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
         }
+        moveBackward(0.2,0.6);
         raiseLinearSlide(0);
         turnLeft(47.5);
         moveForward(0.75,1.0);
@@ -110,6 +111,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
             sleep(200);
             autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
         }
+        moveBackward(0.2,0.6);
         raiseLinearSlide(0);
     }
 
@@ -148,6 +150,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
             sleep(200);
             autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
         }
+        moveBackward(0.2,0.6);
         raiseLinearSlide(0);
         turnLeft(47.5);
         moveBackward(0.75,1.0);

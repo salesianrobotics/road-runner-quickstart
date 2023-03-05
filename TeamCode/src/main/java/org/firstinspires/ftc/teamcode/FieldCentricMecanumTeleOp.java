@@ -80,8 +80,8 @@ public class FieldCentricMecanumTeleOp extends StandardBot
         // Adjust the orientation parameters to match your robot
 
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
 
         // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
 
