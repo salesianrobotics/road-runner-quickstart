@@ -15,7 +15,7 @@ import java.util.List;
 
 @Autonomous(name = "RIGHT_AUTO1HIGH", group = "Linear Opmode")
 
-public class RIGHT_AUTO1HIGH extends AutonomousBot {
+public class OLD_RIGHT_AUTO1HIGH extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;

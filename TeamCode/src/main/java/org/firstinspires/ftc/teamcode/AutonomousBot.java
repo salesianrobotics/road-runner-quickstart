@@ -2,17 +2,21 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -63,6 +67,7 @@ public abstract class AutonomousBot extends StandardBot {
      */
     TFObjectDetector tfod;
 
+    StandardTrackingWheelLocalizer localizer;
     @Override
     public void runOpMode() {
 
@@ -82,6 +87,8 @@ public abstract class AutonomousBot extends StandardBot {
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+
     }
 
     /**
@@ -100,6 +107,29 @@ public abstract class AutonomousBot extends StandardBot {
         // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.
         //tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
         tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
+    }
+
+    void initLocalizer()
+    {
+        List<Integer> lastTrackingEncPositions = new ArrayList<>();
+        List<Integer> lastTrackingEncVels = new ArrayList<>();
+        localizer = new StandardTrackingWheelLocalizer(hardwareMap, lastTrackingEncPositions, lastTrackingEncVels);
+    }
+
+    void correctPathHeading(Pose2d currentPose, Pose2d expectedPose)
+    {
+        double headingDifference = currentPose.getHeading() - expectedPose.getHeading();
+        double xDifference = currentPose.getX() - expectedPose.getX();
+        double yDifference = currentPose.getY() - expectedPose.getY();
+
+        turnRight(Math.toRadians(headingDifference));
+        leftStrafeInches(xDifference);
+        moveForwardInches(yDifference);
+
+        telemetry.addData("Path-Heading Correction", "X-Difference (%.2f)", xDifference);
+        telemetry.addData("Path-Heading Correction", "Y-Difference (%.2f)", yDifference);
+        telemetry.addData("Path-Heading Correction", "Heading-Difference (%.2f)", headingDifference);
+
     }
 
     void scanFieldOfVision() {

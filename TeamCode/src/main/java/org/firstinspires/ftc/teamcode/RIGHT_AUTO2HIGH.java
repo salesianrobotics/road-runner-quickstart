@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Blinker;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -32,137 +33,69 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
 
     // delivers to highest junction and returns true if successful
     int autoConePosition = AUTO_CONE_POSITION;
+    double autoWheelPower = 0.5;
+    double coneOneStrafeAmount = 3.23;
+    double coneOneForwardAmount = 0.1;
 
     private void Park1() {
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
-        {
-            raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
-            stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-            sleep(200);
-            raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
-            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            sleep(200);
-            stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-            sleep(200);
-            autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
-        turnLeft(47.5);
-        moveForward(0.75,1.0);
+
+        leftStrafe(0.2,0.5);
+        moveForward(1.0,0.5);
 
     }
 
     private void Park2() {
-
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
-        {
-            raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
-            stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-            sleep(200);
-            raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
-            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            sleep(200);
-            stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-            sleep(200);
-            autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
+        leftStrafe(0.2,0.5);
     }
 
     private void Park3() {
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
+
+        leftStrafe(1.1,0.5);
+        moveBackward(1.1,0.5);
+
+    }
+
+    void deliverTwoCones()
+    {
+        rightStrafe(coneOneStrafeAmount,autoWheelPower);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
+        moveForward(coneOneForwardAmount,autoWheelPower);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
+        sleep(400);
+        //raiseLinearSlide(SLIGHTLY_BELOW_HIGH_JUNCTION_POSITION);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
+        sleep(400);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+
+        //moveBackward(coneOneForwardAmount,autoWheelPower);
+        leftStrafe(0.375,autoWheelPower);
+        /*for(int i = 0; i < 0; i++)
         {
             raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
+            turnLeft(183);
+            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+            moveForward(1.05,autoWheelPower);
+
             stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
             sleep(200);
             raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
+            moveBackward(1.0, 0.25);
+            turnLeft(160);
+            stdWristServo.setPosition(WRIST_UP_POSITION);
+            moveForward(0.2,autoWheelPower);
             stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
             sleep(200);
             stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
             sleep(200);
             autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
-        turnLeft(47.5);
-        moveBackward(0.75,1.0);
-
+        }*/
     }
+
 
     @Override
     public void runOpMode() {
 
         init(hardwareMap);
-
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
         sleep(1000);
         stdWristServo.setPosition(WRIST_REST_POSITION);
@@ -175,6 +108,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
         // first.
         initVuforia();
         initTfod();
+
 
         /**
          * Activate TensorFlow Object Detection before we wait for the start command.
@@ -195,6 +129,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
         /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
+        stdLinearSlide.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         waitForStart();
 
         if (opModeIsActive()) {
@@ -227,13 +162,17 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
 
                             // WRITE CODE WHAT TO DO WHEN DETECTED SIGNAL SLEEVE
 
-                            if (recognition.getLabel().equals("SilverEagleSignal1") && recognition.getConfidence() * 100 > 0.750) {
+                            if (recognition.getLabel().equals("SilverEagleSignal1") && recognition.getConfidence() * 100 > 0.750)
+                            {
+                                deliverTwoCones();
                                 Park1();
                                 return;
                             } else if (recognition.getLabel().equals("SilverEagleSignal2") && recognition.getConfidence() * 100 > 0.750) {
+                                deliverTwoCones();
                                 Park2();
                                 return;
                             } else if (recognition.getLabel().equals("SilverEagleSignal3") && recognition.getConfidence() * 100 > 0.750) {
+                                deliverTwoCones();
                                 Park3();
                                 return;
                             }

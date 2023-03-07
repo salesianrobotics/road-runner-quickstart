@@ -77,7 +77,7 @@ public abstract class StandardBot extends LinearOpMode {
     static final double    LINEAR_SLIDE_OPTIMAL_CURRENT_TOLERANCE = 5000.0;
 
     static final int    LINEAR_SLIDE_POSITION_TOLERANCE = 100;
-    static final double OPTIMAL_LINEAR_SLIDE_SPEED = 15.5 * TICKS_PER_LINEAR_SLIDE_REVOLUTION;
+    static final double OPTIMAL_LINEAR_SLIDE_SPEED = 20.5 * TICKS_PER_LINEAR_SLIDE_REVOLUTION;
 
     static final double OPTIMAL_DISTNACE_FROM_JUNCTION = 4.0; // in inches
 
@@ -134,11 +134,12 @@ public abstract class StandardBot extends LinearOpMode {
     static final double WRIST_REST_POSITION = 0.70;
 
     static final int HIGH_JUNCTION_POSITION = (int)(33.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+    static final int SLIGHTLY_BELOW_HIGH_JUNCTION_POSITION = (int)(32.0 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int MEDIUM_JUNCTION_POSITION = (int)(23.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int LOW_JUNCTION_POSITION = (int)(13.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int GROUND_JUNCTION_POSITION = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
-    static final int AUTO_CONE_POSITION = (int)(4.5 * TICKS_PER_INCH_LINEAR_SLIDE);
+    static final int AUTO_CONE_POSITION = (int)(4.6 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int AUTO_CONE_POSITION_DECREMENT = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
 
