@@ -38,20 +38,23 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
     double coneOneForwardAmount = 0.1;
 
     private void Park1() {
-
+        moveBackward(0.2,0.5);
+        turnLeft(45);
         leftStrafe(0.2,0.5);
         moveForward(1.0,0.5);
 
     }
 
     private void Park2() {
+        moveBackward(0.2,0.5);
+        turnLeft(45);
         leftStrafe(0.2,0.5);
     }
 
     private void Park3() {
-
-        leftStrafe(1.1,0.5);
-        moveBackward(1.1,0.5);
+        moveBackward(0.2,0.5);
+        turnLeft(45);
+        moveBackward(1.0,0.5);
 
     }
 
@@ -67,19 +70,19 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
         sleep(400);
         stdWristServo.setPosition(WRIST_REST_POSITION);
 
-        //moveBackward(coneOneForwardAmount,autoWheelPower);
+        moveBackward(coneOneForwardAmount,autoWheelPower);
         leftStrafe(0.375,autoWheelPower);
-        /*for(int i = 0; i < 0; i++)
+        for(int i = 0; i < 1; i++)
         {
             raiseLinearSlide(autoConePosition);
             turnLeft(183);
             stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            moveForward(1.05,autoWheelPower);
+            moveForward(1.2,autoWheelPower);
 
             stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
             sleep(200);
             raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.0, 0.25);
+            moveBackward(1.1, 0.25);
             turnLeft(160);
             stdWristServo.setPosition(WRIST_UP_POSITION);
             moveForward(0.2,autoWheelPower);
@@ -88,7 +91,7 @@ public class RIGHT_AUTO2HIGH extends AutonomousBot {
             stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
             sleep(200);
             autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }*/
+        }
     }
 
 

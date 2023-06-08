@@ -152,6 +152,7 @@ public abstract class StandardBot extends LinearOpMode {
     static final int GROUND_JUNCTION_POSITION = (int)(0.47 * TICKS_PER_INCH_LINEAR_SLIDE);
     */
 
+    public DcMotorImplEx stdArmMotor = null;
     HardwareMap hwMap = null;
 
     /* Constructor */
@@ -178,7 +179,7 @@ public abstract class StandardBot extends LinearOpMode {
 
         stdLinearSlide.setDirection(DcMotorEx.Direction.FORWARD);
 
-        //stdArmMotor.setDirection(DcMotor.Direction.REVERSE);
+        stdArmMotor.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void setDriveTrainToRunWithoutEncoder() {
@@ -226,6 +227,7 @@ public abstract class StandardBot extends LinearOpMode {
         stdRightFront.setPower(0);
         stdRightRear.setPower(0);
         stdLinearSlide.setPower(0);
+        stdArmMotor.setPower(0);
     }
 
     public void setDriveTrainToRunToPosition() {
@@ -575,6 +577,8 @@ public abstract class StandardBot extends LinearOpMode {
         stdRightRear = hwMap.get(DcMotorImplEx.class, "RightRear");
 
         stdLinearSlide = hwMap.get(DcMotorImplEx.class, "LinearSlide");
+
+        stdArmMotor = hwMap.get(DcMotorImplEx.class, "Arm");
 
         // Define and initialize ALL installed servos.
 

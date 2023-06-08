@@ -32,6 +32,7 @@ public class DuoTeleOpMain extends StandardBot {
 
     DcMotorImplEx linearSlide = null;
 
+    DcMotorImplEx armMotor = null;
     Servo gripperServo = null;
     Servo wristServo = null;
 
@@ -85,6 +86,8 @@ public class DuoTeleOpMain extends StandardBot {
         gripperServo = stdGripperServo;
         wristServo = stdWristServo;
 
+        armMotor = stdArmMotor;
+
         telemetry.addData("GripperServo", "position (%.2f)", gripperServo.getPosition());
         telemetry.addData("WristServo", "position (%.2f)", wristServo.getPosition());
 
@@ -97,6 +100,7 @@ public class DuoTeleOpMain extends StandardBot {
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("LinearSlide", "starting at position %7d", linearSlide.getCurrentPosition());
 
+        telemetry.addData("ArmMotor", "Power is (%.2f)", armMotor.getPower());
         telemetry.update();
 
 
@@ -135,6 +139,8 @@ public class DuoTeleOpMain extends StandardBot {
             linearSlide.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
             linearSlide.setPower(gamepad2.right_stick_y);
 
+            armMotor.setPower(gamepad2.left_stick_y);
+
             //        if (gamepad2.right_stick_y != 0)
             //        {
             //            linearSlide.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
@@ -171,7 +177,7 @@ public class DuoTeleOpMain extends StandardBot {
             checkMotorCurrent("rightRearMotor", rightRear, OPTIMAL_CURRENT_TOLERANCE);
 
             checkMotorCurrent("linearSlideMotor", linearSlide, LINEAR_SLIDE_OPTIMAL_CURRENT_TOLERANCE);
-
+            checkMotorCurrent("armMotor", armMotor, OPTIMAL_CURRENT_TOLERANCE);
             // Gripper servo
             if(gamepad2.left_bumper) // OPEN GRIPPER
             {
@@ -213,7 +219,7 @@ public class DuoTeleOpMain extends StandardBot {
 
             //telemetry.addData("LinearSlide", "targetPosition is %7d", linearSlide.getTargetPosition());
             telemetry.addData("LinearSlide", "currentPosition is %7d", linearSlide.getCurrentPosition());
-
+            telemetry.addData("ArmMotor", "Power is (%.2f)", armMotor.getPower());
             telemetry.update();
         }
     }
