@@ -15,7 +15,7 @@ import java.util.List;
 
 @Autonomous(name = "RIGHT_AUTO1HIGH", group = "Linear Opmode")
 
-public class OLD_RIGHT_AUTO1HIGH extends AutonomousBot {
+public class RIGHT_AUTO1HIGH extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
@@ -35,18 +35,7 @@ public class OLD_RIGHT_AUTO1HIGH extends AutonomousBot {
     private void Park1() {
         stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
         stdWristServo.setPosition(WRIST_REST_POSITION);
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //moveForward(0.1,0.3);
-        //rightStrafe(1.0,0.3);
-        //turnLeft(1);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        //sleep(200);
-        //moveForward(0.1, 0.3);
-       // sleep(200);
-        //leftStrafe(1.6,0.3);
-        //turnLeft(90);
-        //stdWristServo.setPosition(WRIST_REST_POSITION);
-        rightStrafe(3.4,0.3);
+        rightStrafe(3.3,0.3);
         sleep(300);
        // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
