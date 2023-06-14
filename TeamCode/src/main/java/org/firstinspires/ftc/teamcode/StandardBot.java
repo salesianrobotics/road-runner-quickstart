@@ -31,20 +31,16 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorImplEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 /**
  * In this case that robot is a StandardBot.
@@ -179,7 +175,7 @@ public abstract class StandardBot extends LinearOpMode {
 
         stdLinearSlide.setDirection(DcMotorEx.Direction.FORWARD);
 
-        stdArmMotor.setDirection(DcMotor.Direction.REVERSE);
+        //stdArmMotor.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void setDriveTrainToRunWithoutEncoder() {
@@ -227,7 +223,7 @@ public abstract class StandardBot extends LinearOpMode {
         stdRightFront.setPower(0);
         stdRightRear.setPower(0);
         stdLinearSlide.setPower(0);
-        stdArmMotor.setPower(0);
+        //stdArmMotor.setPower(0);
     }
 
     public void setDriveTrainToRunToPosition() {
@@ -578,7 +574,7 @@ public abstract class StandardBot extends LinearOpMode {
 
         stdLinearSlide = hwMap.get(DcMotorImplEx.class, "LinearSlide");
 
-        stdArmMotor = hwMap.get(DcMotorImplEx.class, "Arm");
+        //stdArmMotor = hwMap.get(DcMotorImplEx.class, "Arm");
 
         // Define and initialize ALL installed servos.
 
