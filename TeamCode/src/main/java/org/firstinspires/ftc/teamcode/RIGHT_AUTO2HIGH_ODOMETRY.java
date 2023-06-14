@@ -36,12 +36,12 @@ public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
     private void Park1() {
         //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
+        rightStrafe(3.25,0.6);
         //leftStrafe(0.25,0.6);
         // turnRight(45);
         //turnRight(47.5);
         //moveForward(0.2,0.6);
-        correctPathHeading(localizer.getPoseEstimate(), new Pose2d(42, 0,0));
+        //correctPathHeading(localizer.getPoseEstimate(), new Pose2d(42, 0,0));
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         moveForward(0.1,0.6);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
