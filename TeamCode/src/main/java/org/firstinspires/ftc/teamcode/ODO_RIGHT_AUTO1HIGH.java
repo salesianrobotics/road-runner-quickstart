@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Blinker;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -14,9 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 
-@Autonomous(name = "RIGHT_AUTO2HIGH_ODOMETRY", group = "Linear Opmode")
+@Autonomous(name = "ODO_RIGHT_AUTO1HIGH", group = "Linear Opmode")
 
-public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
+public class ODO_RIGHT_AUTO1HIGH extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
@@ -31,146 +30,116 @@ public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
     private Servo wristServo;
 
     // delivers to highest junction and returns true if successful
-    int autoConePosition = AUTO_CONE_POSITION;
+
 
     private void Park1() {
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.25,0.6);
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
-        //correctPathHeading(localizer.getPoseEstimate(), new Pose2d(42, 0,0));
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        rightStrafe(3.35,0.6);
+        sleep(300);
+       // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
+        sleep(300);
+        moveForward(0.1, 0.5);
+        sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
+        sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        sleep(300);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        sleep(400);
+        moveBackward(0.1, 0.5);
+        //turnLeft(45);
+        leftStrafe(0.5, 0.3);
         sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
-        {
-            raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
-            stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-            sleep(200);
-            raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
-            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            sleep(200);
-            stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-            sleep(200);
-            autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
-        turnLeft(47.5);
-        moveForward(0.75,1.0);
+        turnRight(191);
+        sleep(200);
+       // raiseLinearSlide(GROUND_POSITION);
+        //stdLinearSlide.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //sleep(400);
+        raiseLinearSlide(AUTO_CONE_POSITION);
+        sleep(300);
+
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        //leftStrafe(1.1, 0.3);
+       // raiseLinearSlide(GROUND_JUNCTION_POSITION);
+
+
+
+        // stdWristServo.setPosition(WRIST_UP_POSITION);
 
     }
 
     private void Park2() {
 
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
-
-        correctPathHeading(localizer.getPoseEstimate(), new Pose2d(42, 0,0));
-
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        rightStrafe(3.35,0.3);
+        sleep(300);
+        //turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
+        sleep(300);
+        moveForward(0.1, 0.5);
+        sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
+        sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        sleep(300);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        sleep(400);
+        moveBackward(0.1, 0.5);
+        //turnLeft(45);
+       // moveBackward(0.2, 0.5);
+        leftStrafe(0.5, 0.3);
         sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
-        {
-            raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
-            stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-            sleep(200);
-            raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
-            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            sleep(200);
-            stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-            sleep(200);
-            autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
+        turnRight(191);
+        sleep(200);
+        // raiseLinearSlide(GROUND_POSITION);
+        //stdLinearSlide.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //sleep(400);
+        raiseLinearSlide(AUTO_CONE_POSITION);
+        sleep(300);
+
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        //leftStrafe(1.1, 0.3);
+        // raiseLinearSlide(GROUND_JUNCTION_POSITION);
     }
 
     private void Park3() {
 
-        Pose2d currentPose = localizer.getPoseEstimate();
-        telemetry.addData("Current Odometer Readings", "(%.2f, %.2f, %.2f)", currentPose.getX(), currentPose.getY(), currentPose.getHeading());
-
-        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        //raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        rightStrafe(3.2,0.6);
-
-        currentPose = localizer.getPoseEstimate();
-        telemetry.addData("Current Odometer Readings", "(%.2f, %.2f, %.2f)", currentPose.getX(), currentPose.getY(), currentPose.getHeading());
-
-        //leftStrafe(0.25,0.6);
-        // turnRight(45);
-        //turnRight(47.5);
-        //moveForward(0.2,0.6);
-        correctPathHeading(currentPose, new Pose2d(42, 0,0));
-
-        telemetry.update();
-        
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        rightStrafe(3.35,0.3);
+        sleep(300);
+        //turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        moveForward(0.1,0.6);
+        sleep(300);
+        moveForward(0.1, 0.5);
+        sleep(400);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(200);
+        sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        sleep(300);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        sleep(400);
+        moveBackward(0.1, 0.5);
+        //turnLeft(45);
+        leftStrafe(0.5, 0.3);
         sleep(200);
-        moveBackward(0.1,0.6);
-        leftStrafe(0.3,0.6);
-        for(int i = 0; i < 1; i++)
-        {
-            raiseLinearSlide(autoConePosition);
-            turnLeft(185);
-            //raiseLinearSlide(autoConePosition);
-            //turnRight(147);
-            moveForward(1.2,0.6);
-            stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-            sleep(200);
-            raiseLinearSlide(HIGH_JUNCTION_POSITION);
-            moveBackward(1.2, 0.6);
-            turnLeft(150);
-            moveForward(0.2,0.8);
-            stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-            sleep(200);
-            stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-            sleep(200);
-            autoConePosition -= AUTO_CONE_POSITION_DECREMENT;
-        }
-        moveBackward(0.2,0.6);
-        raiseLinearSlide(0);
-        turnLeft(47.5);
-        moveBackward(0.75,1.0);
+        turnRight(191);
+        sleep(200);
+        // raiseLinearSlide(GROUND_POSITION);
+        //stdLinearSlide.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //sleep(400);
+        raiseLinearSlide(AUTO_CONE_POSITION);
+        sleep(300);
 
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        //leftStrafe(1.1, 0.3);
+        // raiseLinearSlide(GROUND_JUNCTION_POSITION);
     }
 
     @Override
@@ -180,7 +149,7 @@ public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
 
         //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
-        sleep(1000);
+        sleep(500);
         stdWristServo.setPosition(WRIST_REST_POSITION);
 
         telemetry.addData("Status", "Initialized");
@@ -191,16 +160,11 @@ public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
         // first.
         initVuforia();
         initTfod();
-        initLocalizer();
 
-        Pose2d currentPose = localizer.getPoseEstimate();
-        telemetry.addData("Current Odometer Readings", "(%.2f, %.2f, %.2f)", currentPose.getX(), currentPose.getY(), currentPose.getHeading());
-
-
-        /**
+        /*
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
-         **/
+         */
         if (tfod != null) {
             tfod.activate();
 
@@ -213,7 +177,7 @@ public class RIGHT_AUTO2HIGH_ODOMETRY extends AutonomousBot {
             tfod.setZoom(1.0, 16.0 / 9.0);
         }
 
-        /** Wait for the game to begin */
+        /* Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();

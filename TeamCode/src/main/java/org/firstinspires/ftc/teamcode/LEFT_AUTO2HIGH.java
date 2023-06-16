@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Blinker;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -44,7 +43,8 @@ public class LEFT_AUTO2HIGH extends AutonomousBotLeft {
 
     }
 
-    private void Park2() {
+    private void Park2()
+    {
         rightStrafe(0.2,0.5);
     }
 

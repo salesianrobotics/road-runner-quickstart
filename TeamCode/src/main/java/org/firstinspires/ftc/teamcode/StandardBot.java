@@ -31,7 +31,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorImplEx;
@@ -41,6 +40,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * In this case that robot is a StandardBot.
@@ -74,6 +74,7 @@ public abstract class StandardBot extends LinearOpMode {
 
     static final int    LINEAR_SLIDE_POSITION_TOLERANCE = 100;
     static final double OPTIMAL_LINEAR_SLIDE_SPEED = 20.5 * TICKS_PER_LINEAR_SLIDE_REVOLUTION;
+    static final double OPTIMAL_LINEAR_SLIDE_POWER = 0.5;
 
     static final double OPTIMAL_DISTNACE_FROM_JUNCTION = 4.0; // in inches
 
@@ -110,7 +111,9 @@ public abstract class StandardBot extends LinearOpMode {
 
     public DcMotorImplEx stdLinearSlide = null; // motor to control the linear slide
     public DistanceSensor stdDistanceSensorUnderGripper = null;
-    public Rev2mDistanceSensor stdRevDistanceSensorUnderGripper = null;
+    //public Rev2mDistanceSensor stdRevDistanceSensorUnderGripper = null;
+
+    public DistanceSensor stdFrontDistanceSensor = null;
 
     /* local OpMode members. */
 
@@ -135,11 +138,15 @@ public abstract class StandardBot extends LinearOpMode {
     static final int LOW_JUNCTION_POSITION = (int)(13.3 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int GROUND_JUNCTION_POSITION = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
-    static final int AUTO_CONE_POSITION = (int)(5.6 * TICKS_PER_INCH_LINEAR_SLIDE);
+    static final int GROUND_POSITION = (int)(0.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+
+    static final int AUTO_CONE_POSITION = (int)(5.2 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int AUTO_CONE_POSITION_DECREMENT = (int)(1.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
 
     static final int SLIGHT_DOWN_SLIDE_HIGH = (int)(28.0 * TICKS_PER_INCH_LINEAR_SLIDE);
+
+    static final double CONE_STACK_DISTANCE_TOLERANCE =  0.5; // inches
 
     /*
     static final int HIGH_JUNCTION_POSITION = (int)(7 * TICKS_PER_LINEAR_SLIDE_REVOLUTION);
@@ -581,8 +588,10 @@ public abstract class StandardBot extends LinearOpMode {
         stdGripperServo = hwMap.get(Servo.class, "GripperServo");
         stdWristServo = hwMap.get(Servo.class, "WristServo");
 
-        stdDistanceSensorUnderGripper = hwMap.get(DistanceSensor.class, "DistanceSensorUnderGripper");
-        stdRevDistanceSensorUnderGripper = (Rev2mDistanceSensor) stdDistanceSensorUnderGripper;
+        stdDistanceSensorUnderGripper = hwMap.get(DistanceSensor.class, "GripperSensor");
+        //stdRevDistanceSensorUnderGripper = (Rev2mDistanceSensor) stdDistanceSensorUnderGripper;
+
+        stdFrontDistanceSensor = hwMap.get(DistanceSensor.class, "FrontDistanceSensor");
 
         resetDriveTrainEncoder();
         setDriveTrainToRunWithoutEncoder();
@@ -642,6 +651,37 @@ public abstract class StandardBot extends LinearOpMode {
         stdLinearSlide.setVelocity(0.0);
 
     }
+
+    public void adjustLinearSlide(double targetDistanceFromGround) {
+
+        //telemetry.addData("raiseLinearSlide", "Setting to RUN WITH ENCODER");
+        stdLinearSlide.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
+        stdLinearSlide.setDirection(DcMotorEx.Direction.FORWARD);
+
+
+
+        while (!stdLinearSlide.isOverCurrent() &&
+                Math.abs(stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH) - targetDistanceFromGround) > CONE_STACK_DISTANCE_TOLERANCE)
+        {
+            if (stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH) < targetDistanceFromGround) { //
+                stdLinearSlide.setPower(OPTIMAL_LINEAR_SLIDE_POWER);
+            }
+            else {
+                stdLinearSlide.setPower(-OPTIMAL_LINEAR_SLIDE_POWER);
+            }
+
+            sleep(10);
+            telemetry.addData("adjustLinearSlide", "Distance is %5.2f", stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH) );
+
+            telemetry.addData("adjustLinearSlide", "Power is %5.2f", stdLinearSlide.getPower());
+            telemetry.addData("adjustLinearSlide", "CURRENT is %5.2f milli-amps", stdLinearSlide.getCurrent(CurrentUnit.MILLIAMPS));
+            telemetry.update();
+
+        }
+        stdLinearSlide.setPower(0.0);
+    }
+
 
     public void lowerLinearSlide(int position) {
 
