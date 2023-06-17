@@ -61,6 +61,8 @@ public abstract class AutonomousBot extends StandardBot {
 
     StandardTrackingWheelLocalizer localizer;
 
+    public final int SLEEP_TIME = 100;
+
     public AutonomousBot()
     {
 

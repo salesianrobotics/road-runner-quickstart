@@ -41,6 +41,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 /**
  * In this case that robot is a StandardBot.
@@ -132,6 +133,10 @@ public abstract class StandardBot extends LinearOpMode {
     static final double WRIST_LOWER_GRAB_POSITION  = (WRIST_UP_POSITION + WRIST_DOWN_POSITION)/2.0;
     static final double WRIST_REST_POSITION = 0.70;
 
+    static final double CONE_DIAMETER = 4.0;
+
+
+
     static final int HIGH_JUNCTION_POSITION = (int)(33.0 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int SLIGHTLY_BELOW_HIGH_JUNCTION_POSITION = (int)(32.0 * TICKS_PER_INCH_LINEAR_SLIDE);
     static final int MEDIUM_JUNCTION_POSITION = (int)(23.3 * TICKS_PER_INCH_LINEAR_SLIDE);
@@ -157,6 +162,8 @@ public abstract class StandardBot extends LinearOpMode {
 
     public DcMotorImplEx stdArmMotor = null;
     HardwareMap hwMap = null;
+
+    public SampleMecanumDrive stdMecanumDrive = null;
 
     /* Constructor */
     public StandardBot() {
@@ -574,10 +581,13 @@ public abstract class StandardBot extends LinearOpMode {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
+
+        // enable default standard drive below only if SampleMechanumDrive is not used
         stdLeftFront = hwMap.get(DcMotorImplEx.class, "LeftFront");
         stdRightFront = hwMap.get(DcMotorImplEx.class, "RightFront");
         stdLeftRear = hwMap.get(DcMotorImplEx.class, "LeftRear");
         stdRightRear = hwMap.get(DcMotorImplEx.class, "RightRear");
+
 
         stdLinearSlide = hwMap.get(DcMotorImplEx.class, "LinearSlide");
 
@@ -589,8 +599,6 @@ public abstract class StandardBot extends LinearOpMode {
         stdWristServo = hwMap.get(Servo.class, "WristServo");
 
         stdDistanceSensorUnderGripper = hwMap.get(DistanceSensor.class, "GripperSensor");
-        //stdRevDistanceSensorUnderGripper = (Rev2mDistanceSensor) stdDistanceSensorUnderGripper;
-
         stdFrontDistanceSensor = hwMap.get(DistanceSensor.class, "FrontDistanceSensor");
 
         resetDriveTrainEncoder();
@@ -617,6 +625,27 @@ public abstract class StandardBot extends LinearOpMode {
         //telemetry.addData("GripperServo", "position (%.2f)", stdGripperServo.getPosition());
         //telemetry.addData("WristServo", "position (%.2f)", stdWristServo.getPosition());
 
+        telemetry.update();
+    }
+
+    public void initRoadRunner(HardwareMap ahwMap) {
+        hwMap = ahwMap;
+
+        stdMecanumDrive = new SampleMecanumDrive(ahwMap);
+        stdLinearSlide = hwMap.get(DcMotorImplEx.class, "LinearSlide");
+
+        // Define and initialize ALL installed servos.
+
+        stdGripperServo = hwMap.get(Servo.class, "GripperServo");
+        stdWristServo = hwMap.get(Servo.class, "WristServo");
+
+        stdDistanceSensorUnderGripper = hwMap.get(DistanceSensor.class, "GripperSensor");
+        stdFrontDistanceSensor = hwMap.get(DistanceSensor.class, "FrontDistanceSensor");
+
+        stdLinearSlide.setCurrentAlert(StandardBot.OPTIMAL_CURRENT_TOLERANCE, CurrentUnit.MILLIAMPS);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+
+        telemetry.addData("WristServo:", "MIDDLE POSITION");
         telemetry.update();
     }
 

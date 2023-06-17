@@ -13,9 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 
-@Autonomous(name = "RIGHT_AUTO1HIGH", group = "Linear Opmode")
+@Autonomous(name = "RIGHT_AUTO2HIGH_DIST", group = "Linear Opmode")
 
-public class RIGHT_AUTO1HIGH extends AutonomousBot {
+public class RIGHT_AUTO2HIGH_DIST extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
@@ -29,13 +29,14 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
     private DcMotor rightRear;
     private Servo wristServo;
 
+
     // delivers to highest junction and returns true if successful
 
 
     private void Park1() {
 
         rightStrafe(3.25,0.6);
-        sleep(SLEEP_TIME);
+        //sleep(300);
        // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(SLEEP_TIME);
@@ -44,17 +45,42 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        //sleep(300);
+        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        sleep(SLEEP_TIME);
+        moveBackward(0.1, 0.5);
+
+        //turnLeft(45);
+        leftStrafe(0.55, 0.3);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        sleep(SLEEP_TIME);
+        turnRight(191);
+        sleep(SLEEP_TIME);
+        adjustLinearSlide(6.5);
+        sleep(SLEEP_TIME);
+
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        //sleep(300);
+        raiseLinearSlide(HIGH_JUNCTION_POSITION);
+
+        sleep(SLEEP_TIME);
+        moveBackward(2.05, 0.5);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        leftStrafe(0.6, 0.3);
+        //moveForward(0.1, 0.5);
+        sleep(SLEEP_TIME);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        //sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
-        //turnLeft(45);
-        leftStrafe(0.55, 0.3);
-        sleep(SLEEP_TIME);
-        moveForward(1.1,0.5);
-        raiseLinearSlide(GROUND_JUNCTION_POSITION);
-        sleep(SLEEP_TIME);
-        turnRight(191);
+        rightStrafe(0.5, 1.0);
+        //leftStrafe(1.1, 0.3);
+       // raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
 
 
@@ -64,8 +90,8 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
 
     private void Park2() {
 
-        rightStrafe(3.25,0.6);
-        sleep(SLEEP_TIME);
+        rightStrafe(3.20,0.6);
+        //sleep(300);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(SLEEP_TIME);
@@ -74,23 +100,47 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(SLEEP_TIME);
+        //sleep(300);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+
         sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.55, 0.3);
-        sleep(SLEEP_TIME);
-        //moveForward(1.1,0.5);
-        raiseLinearSlide(GROUND_JUNCTION_POSITION);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(SLEEP_TIME);
         turnRight(191);
+        sleep(SLEEP_TIME);
+        adjustLinearSlide(6.5);
+        sleep(SLEEP_TIME);
+
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        sleep(SLEEP_TIME);
+        raiseLinearSlide(HIGH_JUNCTION_POSITION);
+
+        //sleep(200);
+        moveBackward(2.05, 0.5);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        leftStrafe(0.6, 0.3);
+        //moveForward(0.1, 0.5);
+        sleep(SLEEP_TIME);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        //sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        sleep(SLEEP_TIME);
+        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        sleep(SLEEP_TIME);
+        moveBackward(0.1, 0.5);
+        rightStrafe(0.6, 1.0);
+        moveForward(1.0, 1.0);
     }
 
     private void Park3() {
 
-        rightStrafe(3.25,0.6);
-        sleep(SLEEP_TIME);
+        rightStrafe(3.3,0.6);
+        //sleep(300);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
         sleep(SLEEP_TIME);
@@ -99,22 +149,42 @@ public class RIGHT_AUTO1HIGH extends AutonomousBot {
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        //sleep(300);
+        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+
+        sleep(SLEEP_TIME);
+        moveBackward(0.1, 0.5);
+        //turnLeft(45);
+        leftStrafe(0.55, 0.3);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        sleep(SLEEP_TIME);
+        turnRight(191);
+        sleep(SLEEP_TIME);
+        adjustLinearSlide(6.5);
+        //sleep(300);
+
+        moveForward(1.0, 0.4);
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        sleep(SLEEP_TIME);
+        raiseLinearSlide(HIGH_JUNCTION_POSITION);
+
+        //sleep(200);
+        moveBackward(2.05, 0.5);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        leftStrafe(0.6, 0.3);
+        //moveForward(0.1, 0.5);
+        sleep(SLEEP_TIME);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        //sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
         sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
         sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
-        stdWristServo.setPosition(WRIST_REST_POSITION);
-        sleep(SLEEP_TIME);
-        raiseLinearSlide(GROUND_JUNCTION_POSITION);
-        //turnLeft(45);
-        leftStrafe(0.55, 0.3);
-        sleep(SLEEP_TIME);
-        turnRight(191);
-        sleep(SLEEP_TIME);
-        moveForward(0.9,0.3);
-        //raiseLinearSlide(GROUND_JUNCTION_POSITION);
-        sleep(SLEEP_TIME);
-
+        rightStrafe(0.5, 1.0);
+        moveForward(2.2,0.9);
+        // raiseLinearSlide(GROUND_JUNCTION_POSITION);
     }
 
     @Override

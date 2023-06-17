@@ -13,9 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 
-@Autonomous(name = "LEFT_AUTO1HIGH", group = "Linear Opmode")
+@Autonomous(name = "LEFT_AUTO2HIGH_DIST", group = "Linear Opmode")
 
-public class LEFT_AUTO1HIGH extends AutonomousBot {
+public class LEFT_AUTO2HIGH_DIST extends AutonomousBot {
     private Blinker control_Hub;
     private Blinker expansion_Hub;
     private Servo gripperServo;
@@ -36,20 +36,20 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
 
     private boolean Park1() {
         moveBackward(1.0, 0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.6);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
@@ -57,6 +57,9 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
         moveForward(1.9, 0.6);
         //leftStrafe(1.1, 0.3);
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
+
+
+
 
         return true;
 
@@ -67,18 +70,18 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
         moveBackward(1.0, 0.6);
         sleep(300);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.5);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
@@ -88,23 +91,23 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
         return true;
     }
-    private boolean Park3()
-    {
+        private boolean Park3()
+        {
         moveBackward(1.0, 0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.5);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
@@ -121,8 +124,7 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
 
         init(hardwareMap);
 
-        //stdWris
-        // tServo.setPosition(WRIST_MIDDLE_POSITION);
+        //stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
         stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
         sleep(500);
         stdWristServo.setPosition(WRIST_REST_POSITION);

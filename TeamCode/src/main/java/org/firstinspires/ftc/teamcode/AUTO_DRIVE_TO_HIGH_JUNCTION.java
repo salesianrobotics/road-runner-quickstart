@@ -16,7 +16,6 @@ public class AUTO_DRIVE_TO_HIGH_JUNCTION extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        LinearSlideControl linearSlide = new LinearSlideControl(hardwareMap, "LinearSlide");
 
         waitForStart();
 
