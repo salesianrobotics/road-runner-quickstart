@@ -36,20 +36,20 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
 
     private boolean Park1() {
         moveBackward(1.0, 0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.6);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
@@ -65,20 +65,20 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
     private boolean Park2() {
 
         moveBackward(1.0, 0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.5);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
@@ -91,20 +91,20 @@ public class LEFT_AUTO1HIGH extends AutonomousBot {
     private boolean Park3()
     {
         moveBackward(1.0, 0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
+        sleep(SLEEP_TIME);
         moveForward(0.1, 0.5);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);

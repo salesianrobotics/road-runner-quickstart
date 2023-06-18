@@ -112,8 +112,6 @@ public abstract class StandardBot extends LinearOpMode {
 
     public DcMotorImplEx stdLinearSlide = null; // motor to control the linear slide
     public DistanceSensor stdDistanceSensorUnderGripper = null;
-    //public Rev2mDistanceSensor stdRevDistanceSensorUnderGripper = null;
-
     public DistanceSensor stdFrontDistanceSensor = null;
 
     /* local OpMode members. */
@@ -152,6 +150,10 @@ public abstract class StandardBot extends LinearOpMode {
     static final int SLIGHT_DOWN_SLIDE_HIGH = (int)(28.0 * TICKS_PER_INCH_LINEAR_SLIDE);
 
     static final double CONE_STACK_DISTANCE_TOLERANCE =  0.5; // inches
+    static final double CONE_STACK_WALL_DISTANCE_TOLERANCE = 1.0; // inches
+
+    static final double OPTIMAL_DISTANCE_ROBOT_FROM_CONE_STACK_WALL = 4.00; // inches
+    static final double OPTIMAL_DISTANCE_GRIPPER_FROM_GROUND = 6.5;
 
     /*
     static final int HIGH_JUNCTION_POSITION = (int)(7 * TICKS_PER_LINEAR_SLIDE_REVOLUTION);
@@ -688,8 +690,6 @@ public abstract class StandardBot extends LinearOpMode {
 
         stdLinearSlide.setDirection(DcMotorEx.Direction.FORWARD);
 
-
-
         while (!stdLinearSlide.isOverCurrent() &&
                 Math.abs(stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH) - targetDistanceFromGround) > CONE_STACK_DISTANCE_TOLERANCE)
         {
@@ -711,7 +711,31 @@ public abstract class StandardBot extends LinearOpMode {
         stdLinearSlide.setPower(0.0);
     }
 
+    public void adjustToConeStackWall(double targetDistance) {
 
+        //telemetry.addData("raiseLinearSlide", "Setting to RUN WITH ENCODER");
+        //setDriveTrainToRunWithoutEncoder();
+        //setDefaultMotorDirections();
+
+        while (Math.abs(getFrontDistance() - targetDistance) > CONE_STACK_WALL_DISTANCE_TOLERANCE)
+        {
+            if (getFrontDistance() > targetDistance) { //
+                moveForwardInches(getFrontDistance() - targetDistance);
+            }
+            else {
+                moveBackwardInches(targetDistance - getFrontDistance());
+            }
+
+            sleep(10);
+            telemetry.addData("adjustLinearSlide", "Distance is %5.2f", stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH) );
+
+            telemetry.addData("adjustLinearSlide", "Power is %5.2f", stdLinearSlide.getPower());
+            telemetry.addData("adjustLinearSlide", "CURRENT is %5.2f milli-amps", stdLinearSlide.getCurrent(CurrentUnit.MILLIAMPS));
+            telemetry.update();
+
+        }
+        stdLinearSlide.setPower(0.0);
+    }
     public void lowerLinearSlide(int position) {
 
 
@@ -744,5 +768,24 @@ public abstract class StandardBot extends LinearOpMode {
 
     }
 
+    public double getFrontDistance(){ // in INCHES
+        return stdFrontDistanceSensor.getDistance(DistanceUnit.INCH);
+    }
+
+    public double getGripperDistanceFromGround() { // in INCHES
+        return stdDistanceSensorUnderGripper.getDistance(DistanceUnit.INCH);
+    }
+
+    public void stopBeforeConeStackWall()
+    {
+        while (isDriveTrainBusy())
+        {
+            if (getFrontDistance() <= OPTIMAL_DISTANCE_ROBOT_FROM_CONE_STACK_WALL
+                    + CONE_STACK_DISTANCE_TOLERANCE)
+            {
+                setDriveTrainVelocity(0.0);
+            }
+        }
+    }
 
 }

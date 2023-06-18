@@ -31,13 +31,11 @@ public class LEFT_AUTO2HIGH_DIST extends AutonomousBot {
 
     // delivers to highest junction and returns true if successful
 
+    private void deliverFirstCone () {
 
-
-
-    private boolean Park1() {
         moveBackward(1.0, 0.6);
         sleep(SLEEP_TIME);
-        rightStrafe(3.35,0.6);
+        rightStrafe(3.20,0.6);
         sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
@@ -53,13 +51,49 @@ public class LEFT_AUTO2HIGH_DIST extends AutonomousBot {
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
-        //turnRight(50);
+
+    }
+
+    private void deliverSecondCone()
+    {
+        adjustLinearSlide(6.5);
         moveForward(1.9, 0.6);
-        //leftStrafe(1.1, 0.3);
+
+        stopBeforeConeStackWall();
+
+
+        stdGripperServo.setPosition(GRIPPER_CLOSED_POSITION);
+        sleep(SLEEP_TIME);
+        raiseLinearSlide(HIGH_JUNCTION_POSITION);
+
+
+        moveBackward(2.05, 0.5);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+        rightStrafe(0.50, 0.3);
+        moveForward(0.1, 0.5);
+        sleep(SLEEP_TIME);
+        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
+        //sleep(400);
+        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
+        sleep(SLEEP_TIME);
+        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
+        sleep(SLEEP_TIME);
+        moveBackward(0.1, 0.5);
+        stdWristServo.setPosition(WRIST_REST_POSITION);
+
+    }
+    private boolean Park1()
+    {
+        deliverFirstCone();
+        //turnRight(50);
+        deliverSecondCone();
+
+
+
+        leftStrafe(0.5, 1.0);
+        moveForward(2.0,0.9);
+
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
-
-
-
 
         return true;
 
@@ -67,53 +101,20 @@ public class LEFT_AUTO2HIGH_DIST extends AutonomousBot {
 
     private boolean Park2() {
 
-        moveBackward(1.0, 0.6);
-        sleep(300);
-        rightStrafe(3.35,0.6);
-        sleep(SLEEP_TIME);
-        // turnRight(45);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(SLEEP_TIME);
-        moveForward(0.1, 0.5);
-        sleep(SLEEP_TIME);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(SLEEP_TIME);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(SLEEP_TIME);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(SLEEP_TIME);
-        moveBackward(0.1, 0.5);
-        //turnLeft(45);
-        leftStrafe(0.4, 0.6);
-        //turnRight(50);
-        moveForward(0.9, 0.6);
-        //leftStrafe(1.1, 0.3);
+        deliverFirstCone();
+        deliverSecondCone();
+
+        leftStrafe(0.5, 1.0);
+        moveForward(1.0,0.9);
+
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
         return true;
     }
-        private boolean Park3()
-        {
-        moveBackward(1.0, 0.6);
-        sleep(SLEEP_TIME);
-        rightStrafe(3.35,0.6);
-        sleep(SLEEP_TIME);
-        // turnRight(45);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(SLEEP_TIME);
-        moveForward(0.1, 0.5);
-        sleep(SLEEP_TIME);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(SLEEP_TIME);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(SLEEP_TIME);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(SLEEP_TIME);
-        moveBackward(0.1, 0.5);
-        //turnLeft(45);
-        leftStrafe(0.4, 0.6);
-        //turnRight(50);
-       // moveForward(1.8, 0.6);
-        //leftStrafe(1.1, 0.3);
+    private boolean Park3()
+    {
+        deliverFirstCone();
+        deliverSecondCone();
+
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
         return true;
@@ -160,8 +161,6 @@ public class LEFT_AUTO2HIGH_DIST extends AutonomousBot {
         waitForStart();
 
         if (opModeIsActive()) {
-
-
 
             while (opModeIsActive()) {
 

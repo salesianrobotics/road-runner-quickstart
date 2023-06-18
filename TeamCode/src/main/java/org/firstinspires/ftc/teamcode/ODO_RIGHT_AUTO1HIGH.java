@@ -205,29 +205,18 @@ public class ODO_RIGHT_AUTO1HIGH extends SmartBot {
         stdMecanumDrive.setPoseEstimate(startPose);
 
         Trajectory traj1= stdMecanumDrive.trajectoryBuilder(startPose)
-                .strafeRight(64)
-                .addDisplacementMarker(() -> {
+                .strafeRight(64) // to highest junction
+                .addDisplacementMarker(() -> { // raise linear slide to highest position
                     raiseLinearSlide(HIGH_JUNCTION_POSITION);
                 })
-                .build();
-
-        //deliver cone
-        Trajectory traj2 = stdMecanumDrive.trajectoryBuilder(traj1.end())
                 .forward(2)
-                .addDisplacementMarker(() -> {
+                .addDisplacementMarker(() -> { //deliver cone
                     stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
                     raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
                     stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
                     stdWristServo.setPosition(WRIST_REST_POSITION);
                 })
-                .build();
-
-        // move back 2 inches
-        Trajectory traj3 = stdMecanumDrive.trajectoryBuilder(traj2.end())
-                .back(2)
-                .build();
-
-        Trajectory traj4 = stdMecanumDrive.trajectoryBuilder(traj3.end())
+                .back(2) // move back 2 inches
                 .strafeLeft(6)
                 .addDisplacementMarker(() ->
                 {
@@ -237,10 +226,6 @@ public class ODO_RIGHT_AUTO1HIGH extends SmartBot {
                 .build();
 
         stdMecanumDrive.followTrajectory(traj1);
-        stdMecanumDrive.followTrajectory(traj2);
-
-        stdMecanumDrive.followTrajectory(traj3);
-        stdMecanumDrive.followTrajectory(traj4);
         stdMecanumDrive.turn(Math.toRadians(180));
     }
 }

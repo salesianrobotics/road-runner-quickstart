@@ -32,29 +32,32 @@ public class LEFT_AUTO1HIGH_DIST extends AutonomousBot {
     // delivers to highest junction and returns true if successful
 
 
+    private void deliverFirstCone () {
 
-
-    private boolean Park1() {
         moveBackward(1.0, 0.6);
-        sleep(300);
-        rightStrafe(3.35,0.6);
-        sleep(300);
+        sleep(SLEEP_TIME);
+        rightStrafe(3.145,0.6);
+        sleep(SLEEP_TIME);
         // turnRight(45);
         raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.1, 0.6);
-        sleep(400);
+        sleep(SLEEP_TIME);
         stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
+        sleep(SLEEP_TIME);
         stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
+        sleep(SLEEP_TIME);
         moveBackward(0.1, 0.5);
         //turnLeft(45);
         leftStrafe(0.4, 0.6);
+
+    }
+
+
+    private boolean Park1() {
+        deliverFirstCone();
         //turnRight(50);
-        moveForward(1.9, 0.6);
+        moveForward(2.0, 0.6);
         //leftStrafe(1.1, 0.3);
         raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
@@ -67,24 +70,7 @@ public class LEFT_AUTO1HIGH_DIST extends AutonomousBot {
 
     private boolean Park2() {
 
-        moveBackward(1.0, 0.6);
-        sleep(300);
-        rightStrafe(3.35,0.6);
-        sleep(300);
-        // turnRight(45);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.1, 0.5);
-        sleep(400);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
-        moveBackward(0.1, 0.5);
-        //turnLeft(45);
-        leftStrafe(0.4, 0.6);
+        deliverFirstCone();
         //turnRight(50);
         moveForward(0.9, 0.6);
         //leftStrafe(1.1, 0.3);
@@ -93,30 +79,13 @@ public class LEFT_AUTO1HIGH_DIST extends AutonomousBot {
     }
         private boolean Park3()
         {
-        moveBackward(1.0, 0.6);
-        sleep(300);
-        rightStrafe(3.35,0.6);
-        sleep(300);
-        // turnRight(45);
-        raiseLinearSlide(HIGH_JUNCTION_POSITION);
-        sleep(300);
-        moveForward(0.1, 0.5);
-        sleep(400);
-        stdWristServo.setPosition(WRIST_MIDDLE_POSITION);
-        sleep(400);
-        raiseLinearSlide(SLIGHT_DOWN_SLIDE_HIGH);
-        sleep(300);
-        stdGripperServo.setPosition(GRIPPER_OPENED_POSITION);
-        sleep(400);
-        moveBackward(0.1, 0.5);
-        //turnLeft(45);
-        leftStrafe(0.4, 0.6);
-        //turnRight(50);
-       // moveForward(1.8, 0.6);
-        //leftStrafe(1.1, 0.3);
-        raiseLinearSlide(GROUND_JUNCTION_POSITION);
+            deliverFirstCone();
+            //turnRight(50);
+            //moveForward(1.8, 0.6);
+            //leftStrafe(1.1, 0.3);
+            raiseLinearSlide(GROUND_JUNCTION_POSITION);
 
-        return true;
+            return true;
     }
 
     @Override
